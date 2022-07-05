@@ -1,0 +1,8 @@
+.vs
+obj
+out
+vram
+*.user
+*.filters
+*.vcxproj
+*.sln

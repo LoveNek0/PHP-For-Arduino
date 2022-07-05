@@ -50,9 +50,20 @@ public:
         }
         else {
             this->address = MemoryManager::Reallocate(this->address, sizeof(unsigned int) + (sizeof(MemoryData) * (GetSize() + 1) * 2));
-            //todo
+            MemoryManager::Set<MemoryData>(this->address + sizeof(unsigned int) + (sizeof(MemoryData) * (GetSize() * 2)), key);
+            MemoryManager::Set<MemoryData>(this->address + sizeof(unsigned int) + (sizeof(MemoryData) * (GetSize() * 2 + 1)), value);
             SetSize(GetSize() + 1);
         }
+    }
+
+    void Add(MemoryData value) {
+        Set(MemoryInteger(GetSize()), value);
+    }
+
+    MemoryData Get(MemoryData key) {
+        if (IsKeyExist(key))
+            return GetValueByIndex(GetKeyIndex(key));
+        return MemoryData();
     }
 
     void Destroy(){
@@ -71,9 +82,9 @@ public:
         return ToBoolean() ? 1 : 0;
     }
     bool ToBoolean() {
-        return MemoryManager::Get<bool>(GetAddress());
+        return GetSize() != 0;
     }
     string ToString() {
-        return ToBoolean() ? "true" : "false";
+        return "(array)";
     }
 };

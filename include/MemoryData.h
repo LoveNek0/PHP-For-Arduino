@@ -38,6 +38,8 @@ protected:
         this->type = type;
         this->address = MemoryManager::Allocate(size);
     }
+
+public:
     MemoryData() {
         this->type = Type::Null;
         this->address = 0;

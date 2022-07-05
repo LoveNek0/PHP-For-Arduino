@@ -3,6 +3,7 @@
 #include "MemoryInteger.h"
 #include "MemoryDouble.h"
 #include "MemoryBoolean.h"
+#include "MemoryArray.h"
 #include "MemoryManager.h"
 
 using namespace std;
@@ -30,6 +31,16 @@ int main(int argc, char *argv[]){
     cout << c.ToLongLongInteger() << " " << c.ToLongDouble() << " " << c.ToBoolean() << " " << c.ToString() << endl;
     MemoryManager::Dump();
     cout << endl;
+
+    MemoryArray d = MemoryArray();
+    d.Add(a);
+    d.Set(a, b);
+
+    cout << "B: " << d.Get(a).ToLongLongInteger() << " " << d.Get(a).ToLongDouble() << " " << d.Get(a).ToBoolean() << " " << d.Get(a).ToString() << endl;
+    cout << "C: " << d.Get(MemoryInteger(0)).ToLongLongInteger() << " " << d.Get(MemoryInteger(0)).ToLongDouble() << " " << d.Get(MemoryInteger(0)).ToBoolean() << " " << d.Get(MemoryInteger(0)).ToString() << endl;
+    MemoryManager::Dump();
+    cout << endl;
+
 
     system("pause");
     return 0;

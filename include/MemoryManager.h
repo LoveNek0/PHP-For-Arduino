@@ -82,7 +82,8 @@ public:
                 }
             }
         }
-        return 0;
+        JoinEmpty();
+        return Allocate(size);
     }
     
     static void Deallocate(unsigned int address){
@@ -92,7 +93,6 @@ public:
             if(!block.free && address >= block.address && address < block.address + block.size){
                 block.free = true;
                 memory->Set<Block>(current, block);
-                JoinEmpty();
                 break;
             }
             current = block.next;
